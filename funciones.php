@@ -47,7 +47,24 @@ $productos = [
 
 
 function mostrar_carrito(){
+$carrito = isset($_COOKIE["carrito"]) ? unserialize($_COOKIE["carrito"]) : [];
 
+$tabla = '<table border="1" cellpadding="5" cellspacing="0">';
+    $tabla .= '<tr>
+                 <th>Referencia</th>
+                 <th>Unidades</th>
+             
+               </tr>';
+ foreach($carrito as $referencia => $unidades){
+
+      $tabla .= '<tr>';
+  $tabla .= "<td> $referencia</td>";
+        $tabla .= "<td> $unidades</td>";
+       
+        $tabla .= '</tr>';
+ }
+  $tabla .= '</table>';
+    return $tabla;
 
 }
 
