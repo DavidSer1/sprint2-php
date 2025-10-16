@@ -1,9 +1,6 @@
-<?php 
-
+<?php
 include "clienteclass.php";
 
-$cliente = muestra();
-
-echo $cliente;
-
+$cliente = new Cliente();
+$cliente->muestra();
 ?>
