@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente nuevo</title>
+</head>
+<body>
+    
+
+<form action="clientenuevo.php" method="post">
+  <label for="dni">DNI:</label>
+  <input type="text" id="dni" name="dni" required pattern="[0-9]{8}[A-Za-z]" placeholder="12345678A"><br><br>
+
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required placeholder="Introduce tu nombre"><br><br>
+
+  <label for="direccion">Dirección:</label>
+  <input type="text" id="direccion" name="direccion" required placeholder="Calle, número, piso..."><br><br>
+
+  <label for="localidad">Localidad:</label>
+  <input type="text" id="localidad" name="localidad" required placeholder="Ciudad o pueblo"><br><br>
+
+  <label for="provincia">Provincia:</label>
+  <input type="text" id="provincia" name="provincia" required placeholder="Provincia"><br><br>
+
+  <label for="telefono">Teléfono:</label>
+  <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{9}" placeholder="600123456"><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required placeholder="usuario@correo.com"><br><br>
+
+  <input type="submit" value="Enviar">
+</form>
+
+
+
+
+
+</body>
+</html>
