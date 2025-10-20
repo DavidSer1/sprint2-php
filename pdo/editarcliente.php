@@ -36,9 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
    header("Location: index.php");
 
 
-    $stmt = $conexion->prepare("SELECT * FROM Cliente WHERE dni = :dni");
-    $stmt->execute([':dni' => $_POST['dni']]);
-    $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+  
 }
 ?>
 
