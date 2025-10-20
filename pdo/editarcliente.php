@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ':dni' => $_POST['dni']
     ]);
 
-    echo "<p>Cliente actualizado correctamente.</p>";
+   header("Location: index.php");
 
 
     $stmt = $conexion->prepare("SELECT * FROM Cliente WHERE dni = :dni");
@@ -55,25 +55,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <form action="" method="post">
   <label for="dni">DNI:</label>
-  <input type="text" name="dni" value="<?php echo htmlspecialchars($cliente['dni'] ?? ''); ?>" readonly><br><br>
+  <input type="text" name="dni" value="<?php echo htmlspecialchars($cliente['dni'] ); ?>" readonly><br><br>
 
   <label for="nombre">Nombre:</label>
-  <input type="text" name="nombre" value="<?php echo htmlspecialchars($cliente['nombre'] ?? ''); ?>"><br><br>
+  <input type="text" name="nombre" value="<?php echo htmlspecialchars($cliente['nombre'] ); ?>"><br><br>
 
   <label for="direccion">Dirección:</label>
-  <input type="text" name="direccion" value="<?php echo htmlspecialchars($cliente['direccion'] ?? ''); ?>"><br><br>
+  <input type="text" name="direccion" value="<?php echo htmlspecialchars($cliente['direccion']); ?>"><br><br>
 
   <label for="localidad">Localidad:</label>
-  <input type="text" name="localidad" value="<?php echo htmlspecialchars($cliente['localidad'] ?? ''); ?>"><br><br>
+  <input type="text" name="localidad" value="<?php echo htmlspecialchars($cliente['localidad'] ); ?>"><br><br>
 
   <label for="provincia">Provincia:</label>
-  <input type="text" name="provincia" value="<?php echo htmlspecialchars($cliente['provincia'] ?? ''); ?>"><br><br>
+  <input type="text" name="provincia" value="<?php echo htmlspecialchars($cliente['provincia'] ); ?>"><br><br>
 
   <label for="telefono">Teléfono:</label>
-  <input type="tel" name="telefono" value="<?php echo htmlspecialchars($cliente['telefono'] ?? ''); ?>"><br><br>
+  <input type="tel" name="telefono" value="<?php echo htmlspecialchars($cliente['telefono'] ); ?>"><br><br>
 
   <label for="email">Email:</label>
-  <input type="email" name="email" value="<?php echo htmlspecialchars($cliente['email'] ?? ''); ?>"><br><br>
+  <input type="email" name="email" value="<?php echo htmlspecialchars($cliente['email'] ); ?>"><br><br>
 
   <input type="submit" value="Actualizar">
 </form>
