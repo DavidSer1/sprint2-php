@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 
 include "redireccionlogin.php";
 include "funciones.php";

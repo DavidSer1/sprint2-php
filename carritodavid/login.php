@@ -1,8 +1,6 @@
 <?php 
-
-       
+ 
 session_start();
-
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
 
@@ -11,10 +9,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
      $usuariolog = "David";
      $contraseña = 1234;
 
-
      if($usuario == $usuariolog &&  $password == $contraseña ){
-        $_SESSION["usuari"] == $usuario;
-         header("Location: tienda.php");
+        $_SESSION["usuari"] = $usuario;
+        header("Location: tienda.php");
 
      }
      else{
@@ -23,6 +20,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
 
 }
+
+
 
 
 
