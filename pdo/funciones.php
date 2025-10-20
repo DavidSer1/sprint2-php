@@ -2,7 +2,7 @@
 
 function obtenerconexion(){
 try{ 
-    $conexion = new PDO('mysql:host=localhost;dbname=Clientes', 'javi' , 'Destruct0r!2025');
+    $conexion = new PDO('mysql:host=localhost;dbname=Clientes', 'david' , 'Destruct0r!2025');
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $conexion;
 }
