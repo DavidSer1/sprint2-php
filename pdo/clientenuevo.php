@@ -10,6 +10,8 @@ $provincia = $_POST["provincia"];
 $telefono = $_POST["telefono"];
 $email = $_POST["email"];
 
+
+
 $conexion = obtenerconexion();
 
 $stmt = $conexion->prepare(
@@ -28,8 +30,20 @@ $rows = $stmt->execute([
 ]);
 
 if($rows == 1){  
-header("Location: index.php");
+$message = "Cliente creado correctamente.";
+echo "<script>alert('$message');   
+   window.location.href = 'index.php?creacion=$dni';
 
+</script>";
+
+
+}
+else{
+       $message = "Error al crear el cliente.";
+echo "<script>alert('$message');   
+   window.location.href = 'index.php?creacionerronea=$dni';
+
+</script>";
 }
 
 
@@ -38,4 +52,5 @@ header("Location: index.php");
 
 
 }
+
 ?>

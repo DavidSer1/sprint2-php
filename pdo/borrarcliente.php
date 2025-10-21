@@ -9,7 +9,18 @@ $stmt = $conexion->prepare('delete from Cliente where dni = :dni');
 $rows = $stmt->execute([':dni' => $dni]);
 
 if($rows > 0){
-    header("Location: index.php");
+       $message = "Cliente Borrado correctamente";
+echo "<script>alert('$message');   
+   window.location.href = 'index.php?eliminacion=$dni';
+
+</script>";
+}
+else{
+$message = "Error al borrar el cliente";
+echo "<script>alert('$message');   
+   window.location.href = 'index.php?eliminacionerronea=$dni';
+
+</script>"; 
 }
 }
 catch(PDOException $e){

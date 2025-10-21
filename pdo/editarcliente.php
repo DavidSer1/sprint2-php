@@ -33,10 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ':dni' => $_POST['dni']
     ]);
 
-   header("Location: index.php");
+   $message = "Cliente modificado correctamente";
+echo "<script>alert('$message');   
+   window.location.href = 'index.php?modificacion=$dni';
+
+</script>";
 
 
-  
 }
 ?>
 

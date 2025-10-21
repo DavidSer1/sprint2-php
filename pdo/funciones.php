@@ -12,6 +12,14 @@ catch(PDOException $e){
     echo "Error conectandose en la base de datos" . $e->getMessage();
     return null;
 }
+finally{
+    $conexion = null;
+}
+}
+
+function validar(){
+
+    
 }
 
 
