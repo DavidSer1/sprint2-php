@@ -38,7 +38,7 @@ $cliente = new Cliente();
     ?>
  
     <div>
-        <a class="button " href="clientenuevo.html">Crear cliente</a>
+        <a class="button " href="clientenuevo.php">Crear cliente</a>
     </div>
 
     <div class="table-container">

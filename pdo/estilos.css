@@ -104,3 +104,23 @@ a.button:hover {
     width: 100%;
     overflow-x: auto;
 }
+
+     .mensaje {
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .error {
+            background-color: #ffd6d6;
+            border: 1px solid #ff9;
+            color: #900;
+        }
+        .exito {
+            background-color: #d6ffd6;
+            border: 1px solid #9f9;
+            color: #060;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
