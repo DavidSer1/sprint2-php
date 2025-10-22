@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 <head>
     <meta charset="UTF-8">
     <title>Cliente nuevo</title>
-
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
