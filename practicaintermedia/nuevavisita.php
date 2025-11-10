@@ -1,15 +1,15 @@
 <?php
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-
+include "insertarvisita.php";
     $comentario = $_POST["comentario"];
 
     if(insertar_visita($comentario)){
         $mensaje =  "Insertado el comentario correctamente";
-        header("Location: libro-visitas.php?mensaje=$mensaje");
+        header("Location: librovisitas.php?mensaje=$mensaje");
     } else{
      $mensaje =  "El comentario no se ha creado";
-         header("Location: libro-visitas.php?mensaje=$mensaje");
+         header("Location: librovisitas.php?mensaje=$mensaje");
     }
 
 }
@@ -23,10 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Nueva visita</title>
 </head>
 <body>
-    <form action="insertar-visita.php">
-<label for="comentario"></label>
-<input type="text" id="comentario" name="comentario">
+    <form action="" method="POST">
+<label for="comentario">Inserta un comentario</label>
 
+     <textarea name="comentario" id="comentario" rows="4" cols="50"></textarea><br>
+<input type="submit" value="Crear">
     </form>
     
 </body>
