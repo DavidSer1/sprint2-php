@@ -9,27 +9,22 @@ leerarchivo();
 
 
 function leerarchivo() {
-    $archivo = "visitas.txt";
+    $archivo = 'visitas2.txt';
 
     if (!file_exists($archivo)) {
-        echo "No hay comentarios aún.";
+        echo "El archivo no existe.";
         return;
     }
 
-    $abrir = fopen($archivo, "r");
+    // Obtiene todas las líneas en un array
+    $lineas = file($archivo, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-    if ($abrir === false) {
-        echo "No se pudo abrir el archivo.";
-        return;
+    // Recorre cada línea con foreach
+    foreach ($lineas as $linea) {
+        echo $linea . "<br>";
     }
-
-    $texto = fread($abrir, filesize($archivo));
-    fclose($abrir);
-
-    $texto = nl2br($texto . "\n");
-
-    echo $texto;
 }
+
 
 
 
@@ -43,7 +38,7 @@ function leerarchivo() {
 </head>
 <body>
 
-    <a href="nuevavisita.php">Crear visitas</a>
+    <a href="nuevavisita2.php">Crear visitas</a>
     
 </body>
 </html>

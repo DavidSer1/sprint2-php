@@ -1,6 +1,6 @@
 <?php
 function insertar_visita($usuario, $comentario) {
-    $archivo = 'visitas.txt';
+    $archivo = 'visitas2.txt';
     $abrir = fopen($archivo, 'a');
 
     if ($abrir === false) {

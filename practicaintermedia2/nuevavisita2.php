@@ -6,10 +6,10 @@ include "insertarvisita.php";
     $usuario = $_POST["usuario"];
     if(insertar_visita($usuario,$comentario)){
         $mensaje =  "Insertado el comentario correctamente";
-        header("Location: librovisitas.php?mensaje=$mensaje");
+        header("Location: librovisitas2.php?mensaje=$mensaje");
     } else{
      $mensaje =  "El comentario no se ha creado";
-         header("Location: librovisitas.php?mensaje=$mensaje");
+         header("Location: librovisitas2.php?mensaje=$mensaje");
     }
 
 }

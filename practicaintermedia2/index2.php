@@ -16,8 +16,8 @@
 <body>
     <h1> Bienvenido a nuestra pagina </h1>
     <h5>Aqui tendras para pinchar los enlaces</h5>
-<a href="librovisitas.php">Libro visitas</a>
-<a href="nuevavisita.php">Nueva visita</a>
+<a href="librovisitas2.php">Libro visitas</a>
+<a href="nuevavisita2.php">Nueva visita</a>
     
 </body>
 </html>
