@@ -1,15 +1,29 @@
 <?php
-
+$errores = [];
+$usuario = "";
+$comentario = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-include "insertarvisita.php";
+include "insertarvisita2.php";
     $comentario = $_POST["comentario"];
     $usuario = $_POST["usuario"];
-    if(insertar_visita($usuario,$comentario)){
-        $mensaje =  "Insertado el comentario correctamente";
-        header("Location: librovisitas2.php?mensaje=$mensaje");
-    } else{
-     $mensaje =  "El comentario no se ha creado";
-         header("Location: librovisitas2.php?mensaje=$mensaje");
+
+    if($comentario == ""){
+    $errores[] = "El campo usuario es obligatorio";
+    }
+    if($usuario == ""){
+     $errores[] = "El campo comentario es obligatorio";
+
+    }
+   if (empty($errores)) {
+        if (insertar_visita($usuario, $comentario)) {
+            $mensaje = "Insertado el comentario correctamente";
+            header("Location: librovisitas2.php?mensaje=" . urlencode($mensaje));
+            exit;
+        } else {
+            $mensaje = "El comentario no se ha creado";
+            header("Location: librovisitas2.php?mensaje=" . urlencode($mensaje));
+            exit;
+        }
     }
 
 }
@@ -23,12 +37,21 @@ include "insertarvisita.php";
     <title>Nueva visita</title>
 </head>
 <body>
+    <?php 
+
+if (!empty($errores)) {
+    foreach ($errores as $error) {
+        echo "<p style='color:red;'>$error</p>";
+    }
+}
+?>
+
 <form action="" method="POST">
     <label for="usuario">Nombre:</label>
-    <input type="text" name="usuario" id="usuario" required><br><br>
+    <input type="text" name="usuario" id="usuario" ><br><br>
 
     <label for="comentario">Inserta un comentario:</label><br>
-    <textarea name="comentario" id="comentario" rows="4" cols="50" required></textarea><br>
+    <textarea name="comentario" id="comentario" rows="4" cols="50" ></textarea><br>
 
     <input type="submit" value="Crear">
 </form>

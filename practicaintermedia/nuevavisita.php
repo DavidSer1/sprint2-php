@@ -3,6 +3,9 @@
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 include "insertarvisita.php";
     $comentario = $_POST["comentario"];
+if($comentario == ""){
+    echo "El campo comentario es obligario";
+}
 
     if(insertar_visita($comentario)){
         $mensaje =  "Insertado el comentario correctamente";
