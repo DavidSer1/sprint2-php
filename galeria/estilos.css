@@ -1,0 +1,28 @@
+ .contenedor-tabla {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 40%;
+        font-family: Arial, sans-serif;
+    }
+
+    th {
+        background-color: aqua;
+        padding: 10px;
+        border: 1px solid #000;
+        text-align: center;
+    }
+
+    td {
+        padding: 15px;
+        border: 1px solid #000;
+    }
+
+    img {
+        border-radius: 8px;
+        width: 150px;
+    }

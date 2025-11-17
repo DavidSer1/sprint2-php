@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nombre = $_POST["nombre"];
     $archivo = $_FILES["fileToUpload"];
-    
+
     $ext_permitidas = ['jpg', 'jpeg', 'png', 'gif'];
 
     if ($archivo["error"] == 0) {
@@ -55,10 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Mostrar todos los nombres e imágenes</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-<h2>Subir un nombre e imagen</h2>
+<h2>Galeria</h2>
 
 <form action="" method="post" enctype="multipart/form-data">
 
@@ -74,14 +75,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <hr>
 
 <h2>Listado de todos los nombres e imágenes</h2>
+<div class="contenedor-tabla">
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Imagen</th>
+    </tr>
 
-<?php
+    <?php foreach ($datos as $item): ?>
+        <tr>
+            <td><?= htmlspecialchars($item['nombre']); ?></td>
+            <td>
+                <img src="<?= htmlspecialchars($item['imagen']); ?>" >
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+</div>
 
-foreach ($datos as $item) {
-    echo "<p><strong>Nombre:</strong> " . htmlspecialchars($item['nombre']) . "</p>";
-    echo "<img src='" . htmlspecialchars($item['imagen']) . "' width='150'><br><br>";
-}
-?>
 
 </body>
 </html>
