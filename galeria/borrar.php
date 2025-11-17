@@ -10,9 +10,9 @@ header("Location: index.php?mensaje=$mensaje");
 exit;
 
     }
-    $nombre = $_POST['borrar_nombre'];
+    $imagen = $_POST['archivo'];
 
-    $mensaje = "El item con el nombre $nombre borrado correctamente";
+    $mensaje = "El item con el nombre $imagen borrado correctamente";
    header("Location: index.php?mensaje=$mensaje");
 
 }
