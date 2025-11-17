@@ -1,3 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar todos los nombres e imágenes</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<h2 class="galeria">Galeria</h2>
+
+<form action="" class="centre" method="post" enctype="multipart/form-data">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" class="baixarinputs" id="nombre" required><br><br>
+
+    <label for="fileToUpload">Imagen:</label>
+    <input type="file" name="fileToUpload"  class="baixarinputs" id="fileToUpload" ><br>
+
+    <input type="submit" class="enviar" value="Enviar">
+</form>
+
 <?php
 $archivoJSON = "datos.json";
 $datos = [];
@@ -36,50 +58,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 file_put_contents($archivoJSON, json_encode($datos, JSON_PRETTY_PRINT));
 
             } else {
-                echo "Error al guardar la imagen.";
+                echo "<p> Error al guardar la imagen.</p>";
             }
 
         } else {
-            echo "Solo se permiten extensiones    " . implode(", ", $ext_permitidas);
+            echo " <p> Solo se permiten extensiones  </p>   " . implode(", ", $ext_permitidas);
         }
 
     } else {
-        echo " No se ha subido ninguna imagen.";
+      echo "<div class=pare>";
+        echo " <p> No se ha subido ninguna imagen. </p>";
+        echo "</div>";
     }
 }
 
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mostrar todos los nombres e imágenes</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
 
-<h2>Galeria</h2>
-
-<form action="" method="post" enctype="multipart/form-data">
-
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre" id="nombre" required><br><br>
-
-    <label for="fileToUpload">Imagen:</label>
-    <input type="file" name="fileToUpload" id="fileToUpload" ><br><br>
-
-    <input type="submit" value="Enviar">
-</form>
 
 <hr>
 
-<h2>Listado de todos los nombres e imágenes</h2>
+<h2 class="galeria">Listado de todos los nombres e imágenes</h2>
 <div class="contenedor-tabla">
 <table>
     <tr>
         <th>Nombre</th>
         <th>Imagen</th>
+        <th> Accions  </th>
     </tr>
 
     <?php foreach ($datos as $item): ?>
@@ -87,6 +92,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <td><?= htmlspecialchars($item['nombre']); ?></td>
             <td>
                 <img src="<?= htmlspecialchars($item['imagen']); ?>" >
+            </td>
+            <td>
+            <?php echo "<a href=borrar.php?>Borrar</a>"  ?>
             </td>
         </tr>
     <?php endforeach; ?>
