@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $archivo = $_FILES["fileToUpload"];
 
-    $ext_permitidas = ['jpg', 'jpeg', 'png', 'gif'];
+    $ext_permitidas = ['jpg', 'jpeg', 'png'];
 
     if ($archivo["error"] == 0) {
 
