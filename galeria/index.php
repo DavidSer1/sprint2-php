@@ -19,8 +19,17 @@
 
     <input type="submit" class="enviar" value="Enviar">
 </form>
+</body>
+</html>
 
 <?php
+session_start();
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['csrf_token'];
+
+
 $archivoJSON = "datos.json";
 $datos = [];
 
@@ -72,10 +81,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
 ?>
-
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  
 <hr>
 
 <h2 class="galeria">Listado de todos los nombres e imágenes</h2>
@@ -94,13 +108,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="<?= htmlspecialchars($item['imagen']); ?>" >
             </td>
             <td>
-            <?php echo "<a href=borrar.php?>Borrar</a>"  ?>
+    <form method="post" action="borrar.php" style="display:inline;">
+            <input type="hidden" name="borrar_nombre" value="<?= $item['nombre'] ?>">
+            <input type="hidden" name="csrf_token" value="<?= $token ?>">
+            <button type="submit">Borrar</button>
+        </form>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
 </div>
-
-
 </body>
 </html>
+
+
+
