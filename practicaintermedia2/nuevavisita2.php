@@ -8,10 +8,10 @@ include "insertarvisita2.php";
     $usuario = $_POST["usuario"];
 
     if($comentario == ""){
-    $errores[] = "El campo usuario es obligatorio";
+    $errores[] = "El campo comentario es obligatorio";
     }
     if($usuario == ""){
-     $errores[] = "El campo comentario es obligatorio";
+     $errores[] = "El campo usuario es obligatorio";
 
     }
    if (empty($errores)) {
@@ -48,10 +48,10 @@ if (!empty($errores)) {
 
 <form action="" method="POST">
     <label for="usuario">Nombre:</label>
-    <input type="text" name="usuario" id="usuario" ><br><br>
+    <input type="text" name="usuario" id="usuario"    value="<?= htmlspecialchars($usuario) ?>" ><br><br>
 
     <label for="comentario">Inserta un comentario:</label><br>
-    <textarea name="comentario" id="comentario" rows="4" cols="50" ></textarea><br>
+ <textarea name="comentario" id="comentario" rows="4" cols="50"><?= htmlspecialchars($comentario) ?></textarea><br>
 
     <input type="submit" value="Crear">
 </form>
