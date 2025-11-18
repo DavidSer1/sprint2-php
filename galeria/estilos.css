@@ -28,9 +28,10 @@
     }
 
     p{
-        color: red;
-        background-color: greenyellow;
-        width: 20%;
+        color: white;
+        background-color: blue;
+        width: 30%;
+        font-weight: bold;
   
     }
     .pare{

@@ -61,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_F
     } else {
                 echo "<div class=pare>";
         echo "<p>No se ha subido ninguna imagen.</p>";
+              echo "</div>";
     }
 }
 
