@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
 </head>
 <body>
-  
+
+
 <h2 class="galeria">Subir imagen</h2>
+
 <form action="" method="post" class="centre" enctype="multipart/form-data">
     <label>Nombre:</label>
-    <input type="text" name="nombre" classs="baixarinputs" required><br><br>
+    <input type="text" name="nombre" class="baixarinputs" required><br><br>
+
     <label>Imagen:</label>
     <input type="file" name="fileToUpload" class="baixarinputs" required><br><br>
+
     <input type="submit" class="enviar" value="Enviar">
 </form>
-
+    
 </body>
 </html>
 
@@ -30,12 +33,11 @@ $token = $_SESSION['csrf_token'];
 
 $carpeta = "uploads/";
 
-// Subir imagen
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_FILES['fileToUpload'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_FILES['fileToUpload']) && !isset($_POST['borrar'])) {
 
     $nombre = $_POST["nombre"];
     $archivo = $_FILES["fileToUpload"];
-    $ext_permitidas = ['jpg','jpeg','png','gif'];
+    $ext_permitidas = ['jpg','jpeg','png','gif','webp'];
 
     if ($archivo["error"] === 0) {
         $extension = strtolower(pathinfo($archivo["name"], PATHINFO_EXTENSION));
@@ -45,64 +47,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_F
             $rutaDestino = $carpeta . $nuevoNombre;
 
             if (move_uploaded_file($archivo["tmp_name"], $rutaDestino)) {
-
                 file_put_contents($carpeta . "nombres.txt", $nuevoNombre . "|" . $nombre . PHP_EOL, FILE_APPEND);
             } else {
-              echo "<div class=pare>";
-                echo "<p> Error al guardar la imagen.</p> ";
+                echo "<div class=pare>";
+                echo "<p>Error al guardar la imagen.</p>";
                 echo "</div>";
             }
         } else {
-              echo "<div class=pare>";
-            echo "<p>  Solo se permiten extensiones: " . implode(", ", $ext_permitidas) . " </p> ";
-                     echo "</div>";
+                  echo "<div class=pare>";
+            echo "<p>Solo se permiten extensiones: " . implode(", ", $ext_permitidas) . "</p>";
+                  echo "</div>";
         }
     } else {
-        echo "<div class=pare>";
-        echo "No se ha subido ninguna imagen.";
-        echo "</div>";
-
+                echo "<div class=pare>";
+        echo "<p>No se ha subido ninguna imagen.</p>";
     }
 }
 
-// Leer lista de imágenes y nombres
-$lista = [];
+
+// LEER NOMBRES 
+
+$nombres = [];
+
 if (file_exists($carpeta . "nombres.txt")) {
     $lineas = file($carpeta . "nombres.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
     foreach ($lineas as $linea) {
         list($archivoImg, $nombreImg) = explode("|", $linea);
-        $lista[] = ["nombre"=>$nombreImg, "imagen"=>$carpeta.$archivoImg];
+        $nombres[$archivoImg] = $nombreImg;
     }
 }
+
+
+$extensiones = ['jpg','jpeg','png','gif','webp'];
+$lista = [];
+
+$archivos = scandir($carpeta);
+
+foreach ($archivos as $archivo) {
+    if ($archivo == "." || $archivo == "..") continue;
+
+    $extension = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
+
+    if (in_array($extension, $extensiones)) {
+        $lista[] = [
+            "archivo" => $archivo,
+            "nombre"  => $nombres[$archivo] ?? "(Sin nombre)"
+        ];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Galería</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+  
 
 <hr>
 
 <h2 class="galeria">Galería</h2>
-<div class="contenedor-tabla "> 
-<table class="" >
+
+<div class="contenedor-tabla">
+<table>
     <tr>
         <th>Nombre</th>
         <th>Imagen</th>
         <th>Acción</th>
     </tr>
+
     <?php foreach($lista as $item): ?>
     <tr>
         <td><?= htmlspecialchars($item['nombre']); ?></td>
-        <td><img src="<?= htmlspecialchars($item['imagen']); ?>" width="150"></td>
+
+        <td>
+            <img src="uploads/<?= htmlspecialchars($item['archivo']); ?>" width="150">
+        </td>
+
         <td>
             <form method="post">
                 <input type="hidden" name="csrf_token" value="<?= $token; ?>">
-                <input type="hidden" name="archivo" value="<?= basename($item['imagen']); ?>">
+                <input type="hidden" name="archivo" value="<?= htmlspecialchars($item['archivo']); ?>">
                 <input type="hidden" name="borrar" value="1">
                 <button type="submit">Borrar</button>
             </form>
@@ -111,5 +142,6 @@ if (file_exists($carpeta . "nombres.txt")) {
     <?php endforeach; ?>
 </table>
 </div>
+
 </body>
 </html>
