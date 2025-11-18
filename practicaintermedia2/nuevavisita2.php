@@ -1,9 +1,11 @@
 <?php
+include "insertarvisita2.php";
+
+
 $errores = [];
 $usuario = "";
 $comentario = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-include "insertarvisita2.php";
     $comentario = $_POST["comentario"];
     $usuario = $_POST["usuario"];
 
