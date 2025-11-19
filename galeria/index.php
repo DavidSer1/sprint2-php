@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+</head>
+<body>
+    
+<h2 class="galeria">Subir imagen</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    <label>Imagen:</label>
+    <input type="file" name="fileToUpload" required><br><br>
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>
+
+
 <?php
 session_start();
 
@@ -21,15 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['fileToUpload'])) {
             $rutaDestino = $carpeta . $nuevoNombre;
 
             if (move_uploaded_file($archivo["tmp_name"], $rutaDestino)) {
+                echo "<div class=pare>";
                 echo "<p>Imagen subida correctamente.</p>";
+                echo "</div>";
             } else {
+                     echo "<div class=pare>";
                 echo "<p>Error al guardar la imagen.</p>";
+                  echo "</div>";
             }
         } else {
+               echo "<div class=pare>";
             echo "<p>Solo se permiten extensiones: " . implode(", ", $ext_permitidas) . "</p>";
+              echo "</div>";
         }
+
     } else {
+           echo "<div class=pare>";
         echo "<p>No se ha subido ninguna imagen.</p>";
+          echo "</div>";
     }
 }
 
@@ -59,12 +87,7 @@ foreach ($archivos as $archivo) {
 </head>
 <body>
 
-<h2 class="galeria">Subir imagen</h2>
-<form action="" method="post" enctype="multipart/form-data">
-    <label>Imagen:</label>
-    <input type="file" name="fileToUpload" required><br><br>
-    <input type="submit" value="Enviar">
-</form>
+
 
 <hr>
 
