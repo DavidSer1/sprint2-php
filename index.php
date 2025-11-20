@@ -33,6 +33,14 @@ $cliente = Cliente::obtenertodos();
      <td><?php echo $clientes->getprovincia()  ?></td>
      <td><?php echo $clientes->gettelefono()  ?></td>
     <td><?php echo $clientes->getemail()  ?></td>
+ 
+      <td>
+  <?php echo '<a href="editarcliente.php?dni=' . $clientes->getDNI() . '">Editar</a>'; ?>
+</td>
+      <td>
+  <?php echo '<a href="borrarcliente.php?dni=' . $clientes->getDNI() . '">ELIMINAR</a>'; ?>
+</td>
+
 </tr>
 
 <?php endforeach; ?>
