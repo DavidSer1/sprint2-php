@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $localidad = $_POST["localidad"];
      $provincia = $_POST["provincia"];
      $telefono = $_POST["telefono"];
-     $email = $_POST["dni"];
+     $email = $_POST["email"];
 
      if(insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email)){
         $mensaje = "Cliente creado correctamente";
@@ -30,6 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Creacion del cliente</title>
 </head>
 <body>
+    <form method="post">
     <div> 
 <label for="dni">Dni</label>
 <input type="text" name="dni" id="dni">
@@ -65,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <input type="text" name="email"  id="email">
 </div>
 
-
-
+<input type="submit" value="crear">
+ </form>
 </body>
 </html>
