@@ -30,25 +30,32 @@ function eliminarcliente($dni){
 
 }
 
-function editarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email){
+function editarcliente($dni, $nombre, $direccion, $localidad, $provincia, $telefono, $email){
 
-   $conexion = Conexion::obtenerconexion();
+    $conexion = Conexion::obtenerconexion();
 
-  $consulta = $conexion->prepare("update clientes set mombre = :nombre,
-  direccion = :direccion,localidad = :localidad, provincia = :provincia,
-   telefono = :telefono , email = :email where dni = :dni ");
- 
-   $rows = $consulta->execute([':dni'=>$dni, ':nombre' => $nombre, 
-   ':direccion' => $direccion, ':localidad'=> $localidad,
-    ':provincia' => $provincia, ':telefono' =>$telefono, ":email" => $email]);
+    $consulta = $conexion->prepare("UPDATE clientes 
+        SET nombre = :nombre,
+            direccion = :direccion,
+            localidad = :localidad, 
+            provincia = :provincia,
+            telefono = :telefono,
+            email = :email
+        WHERE dni = :dni");
 
-    if($rows > 0){
-      return true;
-    }
-    else{
-      return false;
-    }
+    $consulta->execute([
+        ':nombre' => $nombre, 
+        ':direccion' => $direccion, 
+        ':localidad' => $localidad,
+        ':provincia' => $provincia, 
+        ':telefono' => $telefono,
+        ':email' => $email,
+        ':dni' => $dni
+    ]);
+
+    return $consulta->rowCount() > 0;
 }
+
 
 
 
