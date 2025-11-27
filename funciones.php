@@ -1,7 +1,8 @@
 <?php 
-include "Conexion.class.php";
+require_once "Conexion.class.php";
 
 function insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email){
+   
 $conexion = Conexion::obtenerconexion();
 $consulta = $conexion->prepare("insert into clientes (dni,nombre,direccion,
 localidad,provincia,telefono,email)
@@ -56,6 +57,21 @@ function editarcliente($dni, $nombre, $direccion, $localidad, $provincia, $telef
     return $consulta->rowCount() > 0;
 }
 
+function login($nombre, $contra){
+
+   $conexion = Conexion::obtenerconexion();
+$consulta = $conexion->prepare("SELECT * FROM clientes WHERE nombre = :nombre LIMIT 1");
+$consulta->execute([':nombre' => $nombre]);
+$cliente = $consulta->fetch(PDO::FETCH_ASSOC);
+if ($cliente && password_verify($password, $cliente['password'])) {
+   $_SESSION["nombre"] = $nombre;
+
+return true;
+} else {
+ return false;
+
+}
+}
 
 
 

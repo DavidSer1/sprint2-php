@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if(isset($_GET["dni"])){
     $dnis = $_GET["dni"];
 }
@@ -8,9 +12,29 @@ $consulta = $conexion->prepare("select * from clientes where dni = :dni");
 $consulta->execute([':dni' => $dnis]);
 $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
 
+include "funciones.php";
+
+if($_SERVER["REQUEST_METHOD"] == "POST" ){
+     $dni = $_POST["dni"];
+     $nombre = $_POST["nombre"];
+     $direccion = $_POST["direccion"];
+     $localidad = $_POST["localidad"];
+     $provincia = $_POST["provincia"];
+     $telefono = $_POST["telefono"];
+     $email = $_POST["email"];
+     
+     if(editarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email)){
+         $mensaje = "Cliente Modificado correctamente";
+        header("Location: index.php?mensaje=$mensaje");
+     }
+     else{
+       $mensaje = "El cliente no se ha modificado";
+        header("Location: index.php?mensaje=$mensaje");
+     }
+      
+}
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,26 +88,6 @@ $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
 <?php 
 
 
-include "funciones.php";
-if($_SERVER["REQUEST_METHOD"] == "POST" ){
-     $dni = $_POST["dni"];
-     $nombre = $_POST["nombre"];
-     $direccion = $_POST["direccion"];
-     $localidad = $_POST["localidad"];
-     $provincia = $_POST["provincia"];
-     $telefono = $_POST["telefono"];
-     $email = $_POST["email"];
-     if(editarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email)){
-         $mensaje = "Cliente Modificado correctamente";
-        header("Location: index.php?mensaje=$mensaje");
-     }
-     else{
-       $mensaje = "El cliente no se ha modificado";
-        header("Location: index.php?mensaje=$mensaje");
-     }
-}
 
-
-?>
 
 
