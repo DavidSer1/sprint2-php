@@ -32,6 +32,7 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
 
     if($login($nombre,$contra)){
 $mensaje = "Te has logueado correctamente ";
+$_SESSION["nombre"] = $nombre;
         header("Location: index.php?mensaje=$mensaje");
     }
     else{

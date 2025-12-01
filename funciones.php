@@ -1,15 +1,15 @@
 <?php 
 require_once "Conexion.class.php";
 
-function insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email){
+function insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email,$hash){
    
 $conexion = Conexion::obtenerconexion();
 $consulta = $conexion->prepare("insert into clientes (dni,nombre,direccion,
-localidad,provincia,telefono,email)
- values (:dni, :nombre , :direccion , :localidad, :provincia, :telefono, :email)");
+localidad,provincia,telefono,email,password)
+ values (:dni, :nombre , :direccion , :localidad, :provincia, :telefono, :email, :password)");
  $rows = $consulta->execute([':dni'=> $dni, 
  ':nombre'=> $nombre, ':direccion'=> $direccion, 
- ':localidad'=> $localidad, ':provincia'=> $provincia, ':telefono' => $telefono, ':email'=> $email]);
+ ':localidad'=> $localidad, ':provincia'=> $provincia, ':telefono' => $telefono, ':email'=> $email, ":password" => $hash]);
 
  if($rows == 1){
     return true;
