@@ -1,6 +1,6 @@
 <?php 
 require_once "Conexion.class.php";
-
+session_start();
 function insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email,$hash){
    
 $conexion = Conexion::obtenerconexion();
@@ -57,21 +57,33 @@ function editarcliente($dni, $nombre, $direccion, $localidad, $provincia, $telef
     return $consulta->rowCount() > 0;
 }
 
+
 function login($nombre, $contra){
+    $conexion = Conexion::obtenerconexion();
+    $consulta = $conexion->prepare("SELECT * FROM clientes WHERE nombre = :nombre LIMIT 1");
+    $consulta->execute([':nombre' => $nombre]);
+    $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
 
-   $conexion = Conexion::obtenerconexion();
-$consulta = $conexion->prepare("SELECT * FROM clientes WHERE nombre = :nombre LIMIT 1");
-$consulta->execute([':nombre' => $nombre]);
-$cliente = $consulta->fetch(PDO::FETCH_ASSOC);
-if ($cliente && password_verify($password, $cliente['password'])) {
-   $_SESSION["nombre"] = $nombre;
-
-return true;
-} else {
- return false;
-
+    if($cliente && password_verify($contra, $cliente['password'])){
+        return true;
+    } else {
+        return false;
+    }
 }
+function obtenerPermisos($nombre) {
+    $conexion = Conexion::obtenerconexion();
+    $stmt = $conexion->prepare("SELECT permisos FROM clientes WHERE nombre = :nombre LIMIT 1");
+    $stmt->execute([':nombre' => $nombre]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($usuario){
+        return $usuario['permisos']; // puede ser un string o lista de permisos
+    } else {
+        return false;
+    }
 }
+
+
 
 
 

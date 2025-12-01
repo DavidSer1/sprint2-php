@@ -2,6 +2,7 @@
 include "Cliente.class.php";
 include "redireccionlogin.php";
 $cliente = Cliente::obtenertodos();
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +50,6 @@ $cliente = Cliente::obtenertodos();
 
 </table>
 
-    
+     <a href="cerrar.php">Cerrar</a>
 </body>
 </html>
