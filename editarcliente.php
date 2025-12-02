@@ -1,4 +1,8 @@
+ <?php 
+session_start();
+ if ($_SESSION["permisos"] == "administrador") { ?>
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -85,7 +89,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" ){
 </body>
 </html>
 
-<?php 
+     <?php }
+        else{
+            $mensaje = "Solo puedes modificar con permisos de administrador";
+header("Location: index.php?mensaje=$mensaje");
+
+        }
+        
+        
+        
+        ?>
 
 
 

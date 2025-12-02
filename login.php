@@ -33,10 +33,11 @@ include "funciones.php";
 if($_SERVER["REQUEST_METHOD"]== "POST"){
     $nombre = $_POST["nom"];
     $contra = $_POST["contra"];
-
+$permisos = obtenerPermisos($nombre);
     if(login($nombre,$contra)){
 $mensaje = "Te has logueado correctamente ";
 $_SESSION["nombre"] = $nombre;
+$_SESSION["permisos"] = $permisos;
         header("Location: index.php?mensaje=$mensaje");
     }
     else{

@@ -1,6 +1,6 @@
 <?php 
 require_once "Conexion.class.php";
-session_start();
+
 function insertarcliente($dni,$nombre,$direccion,$localidad,$provincia,$telefono,$email,$hash){
    
 $conexion = Conexion::obtenerconexion();
@@ -72,12 +72,12 @@ function login($nombre, $contra){
 }
 function obtenerPermisos($nombre) {
     $conexion = Conexion::obtenerconexion();
-    $stmt = $conexion->prepare("SELECT permisos FROM clientes WHERE nombre = :nombre LIMIT 1");
+    $stmt = $conexion->prepare("SELECT rol FROM clientes WHERE nombre = :nombre LIMIT 1");
     $stmt->execute([':nombre' => $nombre]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if($usuario){
-        return $usuario['permisos']; // puede ser un string o lista de permisos
+        return $usuario['rol']; // puede ser un string o lista de permisos
     } else {
         return false;
     }

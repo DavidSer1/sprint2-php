@@ -44,11 +44,4 @@ public function getemail(){
 
 }
 
-
-
-
-
-
-
-
 ?>

@@ -1,4 +1,8 @@
+ <?php
+ session_start();
+ if ($_SESSION["permisos"] == "administrador") { ?>
 <?php 
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -23,7 +27,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: index.php?mensaje=$mensaje");
      }
 }
-
 
 ?>
 
@@ -79,3 +82,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  </form>
 </body>
 </html>
+
+        <?php }
+        else{
+            $mensaje = "Solo puedes crear con permisos de administrador";
+header("Location: index.php?mensaje=$mensaje");
+
+        }
+        
+        
+        
+        ?>

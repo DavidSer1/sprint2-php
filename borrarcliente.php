@@ -1,3 +1,6 @@
+ <?php 
+ session_start();
+ if ($_SESSION["permisos"] == "administrador") { ?>
 <?php 
 
 if(isset($_GET["dni"])){
@@ -16,3 +19,13 @@ include "funciones.php";
 
 
 ?>
+     <?php }
+        else{
+            $mensaje = "Solo se puede eliminar con permisos de administrador";
+header("Location: index.php?mensaje=$mensaje");
+
+        }
+        
+        
+        
+        ?>

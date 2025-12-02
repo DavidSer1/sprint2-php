@@ -13,7 +13,9 @@ $cliente = Cliente::obtenertodos();
     <title>Mostrar clientes </title>
 </head>
 <body>
+        <?php if ($_SESSION["permisos"] == "administrador") : ?>
     <a href="clientenuevo.php">Crear cliente</a>
+        <?php endif; ?>
 <table>
 <tr>
 <th>Dni</th>
@@ -23,8 +25,9 @@ $cliente = Cliente::obtenertodos();
 <th>Provincia</th>
 <th>Telefono</th>
 <th>Email</th>
+     <?php if ($_SESSION["permisos"] == "administrador") : ?>
 <th>Accions</th>
-
+      <?php endif; ?>
 </tr>
 <tr>
     <?php  foreach($cliente as $clientes): ?>
@@ -36,12 +39,21 @@ $cliente = Cliente::obtenertodos();
      <td><?php echo $clientes->gettelefono()  ?></td>
     <td><?php echo $clientes->getemail()  ?></td>
  
-      <td>
-  <?php echo '<a href="editarcliente.php?dni=' . $clientes->getDNI() . '">Editar</a>'; ?>
+  <td>
+    <?php if ($_SESSION["permisos"] === "administrador") : ?>
+        <a href="editarcliente.php?dni=<?= $clientes->getDNI() ?>">Editar</a>
+    <?php endif; ?>
 </td>
-      <td>
-  <?php echo '<a href="borrarcliente.php?dni=' . $clientes->getDNI() . '">ELIMINAR</a>'; ?>
+
+<td>
+    <?php if ($_SESSION["permisos"] == "administrador") : ?>
+      <a href="borrarcliente.php?dni=<?= $clientes->getDNI() ?>"
+   onclick="return confirm('¿Seguro que quieres eliminar este cliente?');">
+   ELIMINAR
+</a>
+    <?php endif; ?>
 </td>
+
 
 </tr>
 
@@ -49,7 +61,14 @@ $cliente = Cliente::obtenertodos();
 
 
 </table>
+<?php 
 
+if(isset($_GET["mensaje"])){
+    $mensaje = $_GET["mensaje"];
+    echo $mensaje;
+}
+
+?>
      <a href="cerrar.php">Cerrar</a>
 </body>
 </html>
